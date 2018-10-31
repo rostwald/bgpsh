@@ -1,6 +1,6 @@
 #!/bin/sh
 # crude script to allow bgpctl to be run interactively on a given rdomain
-# this saves us from typing 'route -Tn exec bgpctl <command>' _every_single_time_
+# this saves us from typing 'bgpctl -s /var/run/bgpd.sock.N <command>' _every_single_time_
 
 if [ ! -n "$1" ]; then
    echo "specify rdomain, e.g. '$0 1'"
@@ -8,13 +8,13 @@ if [ ! -n "$1" ]; then
 fi
 
 rdomain=$1
-cmd=bgpctl
+cmd="bgpctl -s /var/run/bgpd.sock.$1 "
 
 echo "running $cmd interactively in context of rdomain $rdomain"
 echo "Type ^D to exit"
 
 while printf '%s' "bgpctl > " ; read -r a; do
-	route -T $rdomain exec $cmd $a
+	$cmd $a
 	printf '\n'
 done
 
