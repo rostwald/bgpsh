@@ -10,7 +10,7 @@ fi
 rdomain=$1
 cmd="bgpctl -s /var/run/bgpd.sock.$1 "
 
-echo "running $cmd interactively in context of rdomain $rdomain"
+echo "running bgpcl interactively in context of rdomain $rdomain"
 echo "Type ^D to exit"
 
 while printf '%s' "bgpctl > " ; read -r a; do
