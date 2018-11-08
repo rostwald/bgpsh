@@ -13,10 +13,6 @@ cmd="bgpctl -s /var/run/bgpd.sock.$1 "
 echo "running bgpcl interactively in context of rdomain $rdomain"
 echo "Type ^D to exit"
 
-while printf '%s' "bgpctl > " ; read -r a; do
+while printf '\n%s' "bgpctl > " ; read -r a; do
 	$cmd $a
-	printf '\n'
 done
-
-# we are nice, so we print a newline when exiting so the shell prompt isn't mangled
-printf '\n'
